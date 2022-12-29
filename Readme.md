@@ -39,6 +39,7 @@ Response
 
 Post http://localhost:8080/api/auth/signin
 
+Body
 ````json
 {
     "username": "test",
@@ -61,5 +62,24 @@ Response
 }
 ```
 
+POST  http://localhost:8080/api/auth/lost
+
+Body
+````json
+{
+    "email": "aristide.ff@gmail.com"
+}
+````
+
+Reponse
+
+````json
+{
+    "message": "Password change default"
+}
+````
+Pour simplifier le tout à chaque fois le mot de passe par défaut au moment
+du changement est Apple. 
+On peut le changer dans ressources c'est la propriété android.app.default_password.
 
 

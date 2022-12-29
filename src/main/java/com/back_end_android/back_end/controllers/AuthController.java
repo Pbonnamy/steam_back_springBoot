@@ -4,6 +4,7 @@ import com.back_end_android.back_end.models.ERole;
 import com.back_end_android.back_end.models.Role;
 import com.back_end_android.back_end.models.User;
 import com.back_end_android.back_end.payload.request.LoginRequest;
+import com.back_end_android.back_end.payload.request.LostRequest;
 import com.back_end_android.back_end.repository.RoleRepository;
 import com.back_end_android.back_end.repository.UserRepository;
 import com.back_end_android.back_end.security.services.UserDetailsImpl;
@@ -12,6 +13,7 @@ import com.back_end_android.back_end.payload.response.JwtResponse;
 import com.back_end_android.back_end.payload.response.MessageResponse;
 import com.back_end_android.back_end.security.jwt.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -30,6 +33,9 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
+
+    @Value("${android.app.default_password}")
+    private String passwordModify;
     @Autowired
     AuthenticationManager authenticationManager;
 
@@ -103,5 +109,20 @@ public class AuthController {
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
+
+    @PostMapping("/lost")
+    public ResponseEntity<?> findLostPassword(@Validated @RequestBody LostRequest lostRequest){
+        if (!userRepository.existsByEmail(lostRequest.getEmail())){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Email doesn't exist"));
+        }
+        Optional<User> user = userRepository.findByEmail(lostRequest.getEmail());
+        User userSave= user.get();
+        userSave.setPassword(encoder.encode(passwordModify));
+        userRepository.save(userSave);
+        return ResponseEntity.ok().body(new MessageResponse("Password change default"));
+    }
+
 }
 

@@ -1,10 +1,12 @@
 package com.back_end_android.back_end.payload.request;
 
+import javax.validation.constraints.NotBlank;
+
 public class LoginRequest {
-    //@NotBlank
+    @NotBlank
     private String username;
 
-   // @NotBlank
+    @NotBlank
     private String password;
 
     public String getUsername() {
