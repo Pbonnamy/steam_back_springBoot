@@ -20,7 +20,6 @@ public class ServiceDetailsGame {
 
     public GameDetails setGame(int id) throws IOException {
         ControllerOther controller = new ControllerOther();
-
         return controller.start(id, "fr");
     }
 

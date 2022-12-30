@@ -12,6 +12,26 @@ public class GameDetails {
 
     private String description;
 
+    private String price;
+
+    private  int id;
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
 
     public void setName(String name) {
         this.name = name;
