@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface WishlistRepository extends MongoRepository<WhishList,String> {
 
-    List<WhishList> findAllByTenant(String tenant);
+    List<WhishList> findAllByTenantAndType(String tenant, String type);
 }

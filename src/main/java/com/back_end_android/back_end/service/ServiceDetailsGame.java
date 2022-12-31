@@ -84,7 +84,7 @@ public class ServiceDetailsGame {
     }
 
 
-    public WhishList save(String name, int steamId) throws IOException {
+    public WhishList save(String name, int steamId, String type) throws IOException {
         Optional<User> user =  userRepository.findByUsername(name);
         if(user.isPresent()==false) {
             return null;
@@ -92,7 +92,7 @@ public class ServiceDetailsGame {
         String userId = user.get().getId();
         GameDetails gameDetails = setGame(steamId);
         WhishList whishList = new WhishList(userId,gameDetails.getName(), gameDetails.getId(),gameDetails.getEditor(),gameDetails.getUrlImage(),
-                gameDetails.getCover(),gameDetails.getDescription(),gameDetails.getPrice());
+                gameDetails.getCover(),gameDetails.getDescription(),gameDetails.getPrice(), type);
         return wishlistRepository.save(whishList);
 
     }
@@ -103,13 +103,13 @@ public class ServiceDetailsGame {
     }
 
 
-    public List<WhishList> listWhishlist(String name){
+    public List<WhishList> listWhishlist(String name, String type){
         Optional<User> user =  userRepository.findByUsername(name);
         if(user.isPresent()==false) {
             return null;
         }
         String userId = user.get().getId();
-        return wishlistRepository.findAllByTenant(userId);
+        return wishlistRepository.findAllByTenantAndType(userId, type);
     }
 
 }

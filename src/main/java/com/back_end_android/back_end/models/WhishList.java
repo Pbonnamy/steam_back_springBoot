@@ -25,7 +25,9 @@ public class WhishList {
 
     private String price;
 
-    public WhishList( String tenant, String name, int steamID, String editor, String urlImage, String cover, String description, String price) {
+    private String type;
+
+    public WhishList( String tenant, String name, int steamID, String editor, String urlImage, String cover, String description, String price, String type) {
         this.tenant = tenant;
         this.name = name;
         this.steamID = steamID;
@@ -34,8 +36,12 @@ public class WhishList {
         this.cover = cover;
         this.description = description;
         this.price = price;
+        this.type = type;
     }
 
+    public String getType() {
+        return type;
+    }
 
     public String getId() {
         return id;

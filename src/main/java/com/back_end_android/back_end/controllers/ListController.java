@@ -39,14 +39,12 @@ public class ListController {
     @Autowired
     ServiceDetailsGame serviceDetailsGame;
 
-    @Value("${android.app.jwtSecret}")
-    private String jwtSecret;
 
     @GetMapping("/all/whishlist")
     @PreAuthorize("hasRole('USER')")
     public List<WhishList> list(HttpServletRequest request ){
         String name = decodeName(request.getHeader("Authorization"));
-        return serviceDetailsGame.listWhishlist(name);
+        return serviceDetailsGame.listWhishlist(name, "whishlist");
 
 
     }
@@ -55,20 +53,38 @@ public class ListController {
     @PreAuthorize("hasRole('USER')")
     public WhishList save(@PathVariable int id, HttpServletRequest request ) throws IOException {
         String name = decodeName(request.getHeader("Authorization"));
-        return serviceDetailsGame.save(name, id);
+        return serviceDetailsGame.save(name, id, "whishlist");
 
     }
 
-    @DeleteMapping("/delete/whishlist/{id}")
+    @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasRole('USER')")
     public void delete(@PathVariable String id){
         serviceDetailsGame.delete(id);
     }
 
+
+    @GetMapping("/all/likelist")
+    @PreAuthorize("hasRole('USER')")
+    public List<WhishList> listLike(HttpServletRequest request ){
+        String name = decodeName(request.getHeader("Authorization"));
+        return serviceDetailsGame.listWhishlist(name, "like");
+
+
+    }
+
+    @PostMapping("/save/like/{id}")
+    @PreAuthorize("hasRole('USER')")
+    public WhishList saveLike(@PathVariable int id, HttpServletRequest request ) throws IOException {
+        String name = decodeName(request.getHeader("Authorization"));
+        return serviceDetailsGame.save(name, id, "like");
+
+    }
+
+
     private  String decodeName(String encodedString) {
         String[] jwtDetails = encodedString.split(" ");
-        String name = jwtUtils.getUserNameFromJwtToken(jwtDetails[1]);
-        return name;
+        return jwtUtils.getUserNameFromJwtToken(jwtDetails[1]);
     }
 
 }
