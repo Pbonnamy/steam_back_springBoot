@@ -3,6 +3,7 @@ package com.back_end_android.back_end.controllers;
 import com.back_end_android.back_end.models.responseRetrofit.GameDetails;
 import com.back_end_android.back_end.models.responseRetrofit.ReviewEntityReponse;
 import com.back_end_android.back_end.payload.response.MessageResponse;
+import com.back_end_android.back_end.security.jwt.JwtUtils;
 import com.back_end_android.back_end.service.ServiceDetailsGame;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/steam")
 public class SteamController {
+
+
 
     @Autowired
     private ServiceDetailsGame serviceDetailsGame;

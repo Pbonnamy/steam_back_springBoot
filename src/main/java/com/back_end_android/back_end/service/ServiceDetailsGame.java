@@ -1,17 +1,29 @@
 package com.back_end_android.back_end.service;
 
+import com.back_end_android.back_end.models.User;
+import com.back_end_android.back_end.models.WhishList;
 import com.back_end_android.back_end.models.responseRetrofit.GameDetails;
 import com.back_end_android.back_end.models.responseRetrofit.ReviewEntityReponse;
 import com.back_end_android.back_end.models.responseRetrofit.SearchItem;
+import com.back_end_android.back_end.repository.UserRepository;
+import com.back_end_android.back_end.repository.WishlistRepository;
 import com.back_end_android.back_end.retrofit.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServiceDetailsGame {
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    WishlistRepository wishlistRepository;
 
     public GameDetails setGame(int id, String country) throws IOException {
         ControllerOther controller = new ControllerOther();
@@ -69,6 +81,35 @@ public class ServiceDetailsGame {
             searchItems.add(setGame(id));
         }
         return searchItems;
+    }
+
+
+    public WhishList save(String name, int steamId) throws IOException {
+        Optional<User> user =  userRepository.findByUsername(name);
+        if(user.isPresent()==false) {
+            return null;
+        }
+        String userId = user.get().getId();
+        GameDetails gameDetails = setGame(steamId);
+        WhishList whishList = new WhishList(userId,gameDetails.getName(), gameDetails.getId(),gameDetails.getEditor(),gameDetails.getUrlImage(),
+                gameDetails.getCover(),gameDetails.getDescription(),gameDetails.getPrice());
+        return wishlistRepository.save(whishList);
+
+    }
+
+
+    public void delete(String id){
+        wishlistRepository.deleteById(id);
+    }
+
+
+    public List<WhishList> listWhishlist(String name){
+        Optional<User> user =  userRepository.findByUsername(name);
+        if(user.isPresent()==false) {
+            return null;
+        }
+        String userId = user.get().getId();
+        return wishlistRepository.findAllByTenant(userId);
     }
 
 }
