@@ -302,3 +302,59 @@ Response
     }
 ]
 ````
+
+Whishlist endpoint
+
+Pour ajouter un jeu a la whishlist 
+
+Post http://localhost:8080/api/list/save/whishlist/311210
+
+311210 est le steam id du jeu
+
+Response 
+````json
+{
+    "id": "63b0144ed593fc5fddfbe10c",
+    "tenant": "63adc6c89c982d568dd84b9e",
+    "name": "Call of Duty®: Black Ops III",
+    "steamID": 311210,
+    "editor": "Activision",
+    "urlImage": "https://cdn.akamai.steamstatic.com/steam/apps/311210/ss_ca7376d838d5714f916936f0070824c27c4c5641.1920x1080.jpg",
+    "cover": "https://cdn.akamai.steamstatic.com/steam/apps/311210/header.jpg",
+    "description": "<h1>Zombies Chronicles Deluxe Edition</h1><p><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/311210/extras/CODBO3_Zombies_Chronicles_Deluxe-PC_Bundle-Banner_Special_Announcement-628x230.png?t=1646763462\" /><br><br>Now with more content than ever before.<br><br>Call of Duty®: Black Ops III Zombies Chronicles Deluxe includes the full base game, Season Pass, Zombies Chronicles &amp; additional bonus digital content including:<br><br>The Giant Bonus Map: Zombies returns in all of its undead glory with &quot;The Giant&quot;. Re-live the chaos of Treyarch's classic &quot;Der Riese&quot; Zombies map, picking up the Zombies story with Dempsey, Nikolai, Richtofen, and Takeo where Origins left off.<br><br>3 Personalization Packs: Fan favorite Cyborg &amp; Weaponized 115 packs along with a new Black Ops 3 pack. Each pack comes with a weapon camo, reticles, and calling card.<br><br>The Zombies Chronicles content expansion which delivers 8 remastered classic maps from  Call of Duty®: World at War, Call of Duty®: Black Ops and Call of Duty®: Black Ops II.</p><br><h1>Mod Tools Open Beta Now Live</h1><p><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/311210/extras/CODBO3-PC_ModTools-Art_Logo-616x232.png?t=1646763462\" /><br><br>The Black Ops 3 Mod Tools Open Beta has arrived!  Full version Black Ops 3 owners can install the Mod Tools under the Tool Section via the Steam Library titled <strong><i>Call of Duty: Black Ops III - Mod Tools</i></strong>.<h2 class=\"bb_tag\">Mod Tools Include:</h2><ul class=\"bb_ul\"><li>Black Ops 3 Steam Workshop*<br></li><li>Unranked Server Browser*<br></li><li>Radiant Level Editor<br></li><li>APE, Asset Property Editor<br></li><li>Mod Tools Launcher<br></li><li>Optional additional level building assets from a variety of official Black Ops 3 maps can be installed under the DLC section of Call of Duty: Black Ops III - Mod Tools<br></li><li>Full examples of the multiplayer map Combine and the Zombies map The Giant<br></li><li>New Server Settings Menu in Multiplayer Custom Games and Zombies Private Game where you can set how your server will display in the Unranked Server Browser*<br></li><li>New Mods Menu where you can load and unload your subscribed mods*</li></ul><br>*<i>Downloading the mod tools is not required for these items or to play Black Ops 3 Steam Workshop content</i><h2 class=\"bb_tag\">Modding Guides:</h2><ul class=\"bb_ul\"><li><a href=\"http://steamcommunity.com/sharedfiles/filedetails/?id=768774420\" target=\"_blank\" rel=\"\"  ><u>Official - How to Play - Workshop Guide</u></a><br></li><li><a href=\"http://steamcommunity.com/sharedfiles/filedetails/?id=770558798\" target=\"_blank\" rel=\"\"  ><u>Official - How to Create - Workshop Guide</u></a></li></ul></p><br><h1>About the Game</h1>Call of Duty®: Black Ops III Zombies Chronicles Edition includes the full base game and the Zombies Chronicles content expansion.<br><br>Call of Duty: Black Ops III combines three unique game modes: Campaign, Multiplayer, and Zombies, providing fans with the deepest and most ambitious Call of Duty ever.<br><br>The Zombies Chronicles content expansion delivers 8 remastered classic Zombies maps from Call of Duty®: World at War, Call of Duty®: Black Ops and Call of Duty®: Black Ops II. Complete maps from the original saga are fully remastered and HD playable within Call of Duty®: Black Ops III.",
+    "price": "19,79€"
+}
+````
+
+Pour lister la whishlist
+
+GET http://localhost:8080/api/list/all/whishlist
+
+Response
+```json
+[
+    {
+        "id": "63b0167800759d7d7ddedac2",
+        "tenant": "63adc6c89c982d568dd84b9e",
+        "name": "Call of Duty®: Black Ops III",
+        "steamID": 311210,
+        "editor": "Activision",
+        "urlImage": "https://cdn.akamai.steamstatic.com/steam/apps/311210/ss_ca7376d838d5714f916936f0070824c27c4c5641.1920x1080.jpg",
+        "cover": "https://cdn.akamai.steamstatic.com/steam/apps/311210/header.jpg",
+        "description": "<h1>Zombies Chronicles Deluxe Edition</h1><p><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/311210/extras/CODBO3_Zombies_Chronicles_Deluxe-PC_Bundle-Banner_Special_Announcement-628x230.png?t=1646763462\" /><br><br>Now with more content than ever before.<br><br>Call of Duty®: Black Ops III Zombies Chronicles Deluxe includes the full base game, Season Pass, Zombies Chronicles &amp; additional bonus digital content including:<br><br>The Giant Bonus Map: Zombies returns in all of its undead glory with &quot;The Giant&quot;. Re-live the chaos of Treyarch's classic &quot;Der Riese&quot; Zombies map, picking up the Zombies story with Dempsey, Nikolai, Richtofen, and Takeo where Origins left off.<br><br>3 Personalization Packs: Fan favorite Cyborg &amp; Weaponized 115 packs along with a new Black Ops 3 pack. Each pack comes with a weapon camo, reticles, and calling card.<br><br>The Zombies Chronicles content expansion which delivers 8 remastered classic maps from  Call of Duty®: World at War, Call of Duty®: Black Ops and Call of Duty®: Black Ops II.</p><br><h1>Mod Tools Open Beta Now Live</h1><p><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/311210/extras/CODBO3-PC_ModTools-Art_Logo-616x232.png?t=1646763462\" /><br><br>The Black Ops 3 Mod Tools Open Beta has arrived!  Full version Black Ops 3 owners can install the Mod Tools under the Tool Section via the Steam Library titled <strong><i>Call of Duty: Black Ops III - Mod Tools</i></strong>.<h2 class=\"bb_tag\">Mod Tools Include:</h2><ul class=\"bb_ul\"><li>Black Ops 3 Steam Workshop*<br></li><li>Unranked Server Browser*<br></li><li>Radiant Level Editor<br></li><li>APE, Asset Property Editor<br></li><li>Mod Tools Launcher<br></li><li>Optional additional level building assets from a variety of official Black Ops 3 maps can be installed under the DLC section of Call of Duty: Black Ops III - Mod Tools<br></li><li>Full examples of the multiplayer map Combine and the Zombies map The Giant<br></li><li>New Server Settings Menu in Multiplayer Custom Games and Zombies Private Game where you can set how your server will display in the Unranked Server Browser*<br></li><li>New Mods Menu where you can load and unload your subscribed mods*</li></ul><br>*<i>Downloading the mod tools is not required for these items or to play Black Ops 3 Steam Workshop content</i><h2 class=\"bb_tag\">Modding Guides:</h2><ul class=\"bb_ul\"><li><a href=\"http://steamcommunity.com/sharedfiles/filedetails/?id=768774420\" target=\"_blank\" rel=\"\"  ><u>Official - How to Play - Workshop Guide</u></a><br></li><li><a href=\"http://steamcommunity.com/sharedfiles/filedetails/?id=770558798\" target=\"_blank\" rel=\"\"  ><u>Official - How to Create - Workshop Guide</u></a></li></ul></p><br><h1>About the Game</h1>Call of Duty®: Black Ops III Zombies Chronicles Edition includes the full base game and the Zombies Chronicles content expansion.<br><br>Call of Duty: Black Ops III combines three unique game modes: Campaign, Multiplayer, and Zombies, providing fans with the deepest and most ambitious Call of Duty ever.<br><br>The Zombies Chronicles content expansion delivers 8 remastered classic Zombies maps from Call of Duty®: World at War, Call of Duty®: Black Ops and Call of Duty®: Black Ops II. Complete maps from the original saga are fully remastered and HD playable within Call of Duty®: Black Ops III.",
+        "price": "19,79€"
+    }
+]
+```
+
+
+Pour delete un jeu dans la whishlist 
+Il faut l'id du jeu dans la whishlist 
+
+DELETE http://localhost:8080/api/list/delete/whishlist/63b0167800759d7d7ddedac2
+
+
+Response 
+rien 
+
+
