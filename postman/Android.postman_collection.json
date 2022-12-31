@@ -1,0 +1,362 @@
+{
+	"info": {
+		"_postman_id": "8d2bded2-e540-43cb-9f83-adb1c55f3efb",
+		"name": "Android",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23296354"
+	},
+	"item": [
+		{
+			"name": "signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"test\",\n    \"email\": \"aristide.ff@gmail.com\",\n    \"roles\": [\n        \"ROLE_USER\"\n    ],\n    \"password\": \"test.\"\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"test\",\n    \"password\":\"Apple\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lost password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"aristide.ff@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/lost",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"lost"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetMostPlayedGames",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/steam/GetMostPlayedGames/fr/0/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"steam",
+						"GetMostPlayedGames",
+						"fr",
+						"0",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/steam/details/311210/fr",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"steam",
+						"details",
+						"311210",
+						"fr"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "271590",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/steam/search/b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"steam",
+						"search",
+						"b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List wishlist",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjcyNDQyNTEyLCJleHAiOjE2NzI1Mjg5MTJ9._T0AUUVmbMYanctgPulFyXtcjx_YuO31QiZ2AfNsvQMxXmKZQgncOZMFbwIoXtMTNzX1lsN2Bc9gUotzgFb2iw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/list/all/whishlist",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"list",
+						"all",
+						"whishlist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Review",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/steam/reviews/271590/0/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"steam",
+						"reviews",
+						"271590",
+						"0",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add whishlist",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjcyNDQyNTEyLCJleHAiOjE2NzI1Mjg5MTJ9._T0AUUVmbMYanctgPulFyXtcjx_YuO31QiZ2AfNsvQMxXmKZQgncOZMFbwIoXtMTNzX1lsN2Bc9gUotzgFb2iw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/list/save/whishlist/311210",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"list",
+						"save",
+						"whishlist",
+						"311210"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Whishlist or Like",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjcyNDQyNTEyLCJleHAiOjE2NzI1Mjg5MTJ9._T0AUUVmbMYanctgPulFyXtcjx_YuO31QiZ2AfNsvQMxXmKZQgncOZMFbwIoXtMTNzX1lsN2Bc9gUotzgFb2iw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/list/delete/63b0144ed593fc5fddfbe10c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"list",
+						"delete",
+						"63b0144ed593fc5fddfbe10c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Like",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjcyNDQyNTEyLCJleHAiOjE2NzI1Mjg5MTJ9._T0AUUVmbMYanctgPulFyXtcjx_YuO31QiZ2AfNsvQMxXmKZQgncOZMFbwIoXtMTNzX1lsN2Bc9gUotzgFb2iw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/list/all/likelist",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"list",
+						"all",
+						"likelist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save like",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjcyNDQyNTEyLCJleHAiOjE2NzI1Mjg5MTJ9._T0AUUVmbMYanctgPulFyXtcjx_YuO31QiZ2AfNsvQMxXmKZQgncOZMFbwIoXtMTNzX1lsN2Bc9gUotzgFb2iw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/list/save/like/311210",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"list",
+						"save",
+						"like",
+						"311210"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
