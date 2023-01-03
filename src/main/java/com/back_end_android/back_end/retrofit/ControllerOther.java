@@ -43,7 +43,7 @@ public class ControllerOther {
         gameDetails.setEditor(data.getPublishers().get(0));
         String[] cover = data.getHeader().split("\\?t");
         if (data.getPriceOverview() == null) {
-            gameDetails.setPrice("0,0€");
+            gameDetails.setPrice("0,00€");
         } else {
             gameDetails.setPrice(data.getPriceOverview().getFinalFormatted());
         }
