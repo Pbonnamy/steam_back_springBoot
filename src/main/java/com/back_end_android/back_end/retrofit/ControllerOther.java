@@ -10,6 +10,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 
@@ -45,8 +47,10 @@ public class ControllerOther {
         } else {
             gameDetails.setPrice(data.getPriceOverview().getFinalFormatted());
         }
-        String[] image = data.getScreenshots().get(0).getPath_full().split("\\?t");
-        gameDetails.setUrlImage(image[0]);
+        List<String> images = new ArrayList<>();
+        images.add(data.getScreenshots().get(0).getPath_full().split("\\?t")[0]);
+        images.add(data.getScreenshots().get(1).getPath_full().split("\\?t")[0]);
+        gameDetails.setUrlImage(images);
         gameDetails.setCover(cover[0]);
         return gameDetails;
     }

@@ -4,6 +4,8 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document("wishlist")
 public class WhishList {
     @Id
@@ -17,7 +19,7 @@ public class WhishList {
 
     private String editor;
 
-    private String urlImage;
+    private List<String> urlImage;
 
     private String cover;
 
@@ -26,8 +28,9 @@ public class WhishList {
     private String price;
 
     private String type;
+    
 
-    public WhishList( String tenant, String name, int steamID, String editor, String urlImage, String cover, String description, String price, String type) {
+    public WhishList( String tenant, String name, int steamID, String editor, List<String> urlImage, String cover, String description, String price, String type) {
         this.tenant = tenant;
         this.name = name;
         this.steamID = steamID;
@@ -83,11 +86,11 @@ public class WhishList {
         this.editor = editor;
     }
 
-    public String getUrlImage() {
+    public List<String> getUrlImage() {
         return urlImage;
     }
 
-    public void setUrlImage(String urlImage) {
+    public void setUrlImage(List<String> urlImage) {
         this.urlImage = urlImage;
     }
 

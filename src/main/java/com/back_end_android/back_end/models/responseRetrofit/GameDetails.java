@@ -1,12 +1,14 @@
 package com.back_end_android.back_end.models.responseRetrofit;
 
+import java.util.List;
+
 public class GameDetails {
 
     private String name;
 
     private String editor;
 
-    private String urlImage;
+    private List<String> urlImage;
 
     private String cover;
 
@@ -41,7 +43,7 @@ public class GameDetails {
         this.editor = editor;
     }
 
-    public void setUrlImage(String urlImage) {
+    public void setUrlImage(List<String> urlImage) {
         this.urlImage = urlImage;
     }
 
@@ -61,7 +63,7 @@ public class GameDetails {
         return editor;
     }
 
-    public String getUrlImage() {
+    public List<String> getUrlImage() {
         return urlImage;
     }
 
