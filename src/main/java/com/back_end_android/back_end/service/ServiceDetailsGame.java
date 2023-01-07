@@ -8,6 +8,9 @@ import com.back_end_android.back_end.models.responseRetrofit.SearchItem;
 import com.back_end_android.back_end.repository.UserRepository;
 import com.back_end_android.back_end.repository.WishlistRepository;
 import com.back_end_android.back_end.retrofit.*;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class ServiceDetailsGame {
@@ -35,14 +40,38 @@ public class ServiceDetailsGame {
         return controller.start(id, "fr");
     }
 
-    public ReviewEntityReponse setReview(ReviewResponse.Review review){
+    public ReviewEntityReponse setReview(ReviewResponse.Review review) throws IOException {
         ReviewEntityReponse reviewEntityReponse = new ReviewEntityReponse();
         reviewEntityReponse.setId(review.getAuthor().getSteamid());
         reviewEntityReponse.setDescription(review.getReview());
         double score = Double.valueOf(review.getWeightedVoteScore()) * 5;
         reviewEntityReponse.setLike((int) score);
+        reviewEntityReponse.setName(getNameofPlayerWithSteamId(reviewEntityReponse.getId()));
         return reviewEntityReponse;
 
+    }
+
+
+    private String getNameofPlayerWithSteamId(String id) throws IOException {
+        String page = getContent(id);
+        String[] name = extractTitle(page).split(" :: ");
+        return name[1];
+    }
+
+    private String getContent(String id) throws IOException {
+        final OkHttpClient client = new OkHttpClient.Builder().build();
+        final String urlToScrape = "https://steamcommunity.com/profiles/"+id;// + id;
+        final Request request = new Request.Builder().url(urlToScrape).build();
+        final Response response = client.newCall(request).execute();
+        return response.body().string();
+    }
+
+
+    private String extractTitle(String content) {
+        final Pattern titleRegExp = Pattern.compile("<title>(.*?)</title>", Pattern.DOTALL);
+        final Matcher matcher = titleRegExp.matcher(content);
+        matcher.find();
+        return matcher.group(1);
     }
 
 

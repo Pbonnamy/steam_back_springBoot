@@ -3,6 +3,17 @@ package com.back_end_android.back_end.models.responseRetrofit;
 public class ReviewEntityReponse {
 
     private String id;
+
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     private int like;
 
     private String description;
