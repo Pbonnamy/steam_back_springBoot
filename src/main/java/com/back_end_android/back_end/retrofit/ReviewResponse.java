@@ -1,5 +1,7 @@
 package com.back_end_android.back_end.retrofit;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class ReviewResponse {
@@ -26,6 +28,8 @@ public class ReviewResponse {
         boolean votedUp;
         int votesUp;
         int votesFunny;
+
+        @SerializedName("weighted_vote_score")
         String weightedVoteScore;
         int commentCount;
         boolean steamPurchase;

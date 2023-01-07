@@ -39,7 +39,7 @@ public class ServiceDetailsGame {
         ReviewEntityReponse reviewEntityReponse = new ReviewEntityReponse();
         reviewEntityReponse.setId(review.getAuthor().getSteamid());
         reviewEntityReponse.setDescription(review.getReview());
-        reviewEntityReponse.setLike(review.isVotedUp());
+        reviewEntityReponse.setLike((int) ((Double.valueOf(review.getWeightedVoteScore()) * 100) %5));
         return reviewEntityReponse;
 
     }

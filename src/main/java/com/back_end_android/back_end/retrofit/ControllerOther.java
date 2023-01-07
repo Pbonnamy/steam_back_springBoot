@@ -39,6 +39,7 @@ public class ControllerOther {
         SteamApp.Data data = steamApp.getData();
         gameDetails.setName(data.getName());
         gameDetails.setId(id);
+
         gameDetails.setDescription(data.getDetailed_description());
         gameDetails.setEditor(data.getPublishers().get(0));
         String[] cover = data.getHeader().split("\\?t");

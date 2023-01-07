@@ -3,7 +3,7 @@ package com.back_end_android.back_end.models.responseRetrofit;
 public class ReviewEntityReponse {
 
     private String id;
-    private boolean like;
+    private int like;
 
     private String description;
 
@@ -11,7 +11,7 @@ public class ReviewEntityReponse {
         return id;
     }
 
-    public boolean isLike() {
+    public int getLike() {
         return like;
     }
 
@@ -24,7 +24,7 @@ public class ReviewEntityReponse {
         this.id = id;
     }
 
-    public void setLike(boolean like) {
+    public void setLike(int like) {
         this.like = like;
     }
 
