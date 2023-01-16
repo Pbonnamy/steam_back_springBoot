@@ -12,7 +12,10 @@ Et créer dans cette bdd une collection roles et y mettre
   "name": "ROLE_USER"
 }
 ````
-C'est le seul role autoriser pour le jwt que nous avons créer 
+C'est le seul role autoriser pour le jwt que nous avons créer
+⚠ les endpoints ne sont plus bon. Regarder l'export postman 
+Je compte mettre un swagger quand j'aurais le temps
+
 les endpoints
 
 Post http://localhost:8080/api/auth/signup

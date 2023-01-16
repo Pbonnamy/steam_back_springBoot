@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"test\",\n    \"email\": \"aristide.ff@gmail.com\",\n    \"roles\": [\n        \"ROLE_USER\"\n    ],\n    \"password\": \"test.\"\n    \n}",
+					"raw": "{\n    \"username\": \"test\",\n    \"email\": \"aristide.ff@gmail.com\",\n    \"roles\": [\n        \"ROLE_USER\"\n    ],\n    \"password\": \"tesjjjt.\"\n    \n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -126,7 +126,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/steam/details/311210/fr",
+					"raw": "http://localhost:8080/api/steam/details/311210/en",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -137,7 +137,7 @@
 						"steam",
 						"details",
 						"311210",
-						"fr"
+						"en"
 					],
 					"query": [
 						{
@@ -156,7 +156,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/steam/search/b",
+					"raw": "http://localhost:8080/api/steam/search/en/test/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -166,7 +166,9 @@
 						"api",
 						"steam",
 						"search",
-						"b"
+						"en",
+						"test",
+						""
 					]
 				}
 			},
@@ -210,7 +212,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/steam/reviews/271590/0/10",
+					"raw": "http://localhost:8080/api/steam/reviews/en/271590/0/10",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -220,6 +222,7 @@
 						"api",
 						"steam",
 						"reviews",
+						"en",
 						"271590",
 						"0",
 						"10"
@@ -236,7 +239,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjcyNDQyNTEyLCJleHAiOjE2NzI1Mjg5MTJ9._T0AUUVmbMYanctgPulFyXtcjx_YuO31QiZ2AfNsvQMxXmKZQgncOZMFbwIoXtMTNzX1lsN2Bc9gUotzgFb2iw",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjczOTA0MjcxLCJleHAiOjE2NzM5OTA2NzF9.jRe16gYIlGf1Y01X4CJU5ad_AfxyWx37IIsdIZh5_W7hmYoaKbU2kn30q1wz3HoiEg1eYjS5ZmyMva6ZOnRuJA",
 							"type": "string"
 						}
 					]
@@ -244,7 +247,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/list/save/whishlist/311210",
+					"raw": "http://localhost:8080/api/list/save/whishlist/311210/en",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -255,7 +258,8 @@
 						"list",
 						"save",
 						"whishlist",
-						"311210"
+						"311210",
+						"en"
 					]
 				}
 			},
@@ -333,7 +337,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjcyNDQyNTEyLCJleHAiOjE2NzI1Mjg5MTJ9._T0AUUVmbMYanctgPulFyXtcjx_YuO31QiZ2AfNsvQMxXmKZQgncOZMFbwIoXtMTNzX1lsN2Bc9gUotzgFb2iw",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjczOTA0MjcxLCJleHAiOjE2NzM5OTA2NzF9.jRe16gYIlGf1Y01X4CJU5ad_AfxyWx37IIsdIZh5_W7hmYoaKbU2kn30q1wz3HoiEg1eYjS5ZmyMva6ZOnRuJA",
 							"type": "string"
 						}
 					]
@@ -341,7 +345,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/list/save/like/311210",
+					"raw": "http://localhost:8080/api/list/save/like/311210/fr",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -352,7 +356,66 @@
 						"list",
 						"save",
 						"like",
+						"311210",
+						"fr"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://store.steampowered.com/appreviews/271590?json=1",
+					"protocol": "https",
+					"host": [
+						"store",
+						"steampowered",
+						"com"
+					],
+					"path": [
+						"appreviews",
+						"271590"
+					],
+					"query": [
+						{
+							"key": "json",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test steam",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://store.steampowered.com/appreviews/311210?json=1&language=english",
+					"protocol": "https",
+					"host": [
+						"store",
+						"steampowered",
+						"com"
+					],
+					"path": [
+						"appreviews",
 						"311210"
+					],
+					"query": [
+						{
+							"key": "json",
+							"value": "1"
+						},
+						{
+							"key": "language",
+							"value": "english"
+						}
 					]
 				}
 			},

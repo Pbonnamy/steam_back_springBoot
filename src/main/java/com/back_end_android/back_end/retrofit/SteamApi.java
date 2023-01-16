@@ -16,12 +16,12 @@ public interface SteamApi {
     Call<Pojo> loadListCharts();
 
     @GET("api/appdetails")
-    Call<Map<String, SteamApp>> getAppDetails(@Query("appids") String appids, @Query("cc") String cc);
-    @GET("api/appdetails")
-    Call<Price> getAppDetails(@Query("appids") String appids, @Query("cc") String cc, @Query("filters")  String price_overview);
+    Call<Map<String, SteamApp>> getAppDetails(@Query("l") String l, @Query("appids") String appids, @Query("cc") String cc );
+    /*@GET("api/appdetails")
+    Call<Price> getAppDetails(@Query("appids") String appids, @Query("cc") String cc, @Query("filters")  String price_overview);*/
 
     @GET("appreviews/{id}")
-    Call<ReviewResponse> getReviews(@Path("id") int id, @Query("json") int json);
+    Call<ReviewResponse> getReviews(@Path("id") int id, @Query("json") int json, @Query("language") String language);
 
     @GET("storesearch/")
     Call<SearchRetrofit> getSearch(@Query("term") String search,@Query("l") String country, @Query("cc") String countryCode);

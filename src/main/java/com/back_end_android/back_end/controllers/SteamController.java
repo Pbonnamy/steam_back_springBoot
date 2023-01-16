@@ -39,17 +39,21 @@ public class SteamController {
     }
 
 
-    @GetMapping("/reviews/{id}/{start}/{finish}")
-    public  ResponseEntity<?> reviewsList(@PathVariable int id, @PathVariable int start, @PathVariable int finish) throws IOException {
-        List<ReviewEntityReponse> responseEntities = serviceDetailsGame.listReviewGame(id, start, finish);
+    @GetMapping("/reviews/{language}/{id}/{start}/{finish}")
+    public  ResponseEntity<?> reviewsList(
+            @PathVariable String language,
+            @PathVariable int id,
+            @PathVariable int start,
+            @PathVariable int finish) throws IOException {
+        List<ReviewEntityReponse> responseEntities = serviceDetailsGame.listReviewGame(language, id, start, finish);
         if (responseEntities == null) ResponseEntity.badRequest().body(new MessageResponse("Request don't finish"));
         return ResponseEntity.ok(responseEntities);
     }
 
 
-    @GetMapping("/search/{name}")
-    public ResponseEntity<?>  searchGame(@PathVariable String name) throws IOException {
-        List<GameDetails> gameDetails = serviceDetailsGame.listSearch(name);
+    @GetMapping("/search/{countryCode}/{name}")
+    public ResponseEntity<?>  searchGame(@PathVariable String name,@PathVariable String countryCode ) throws IOException {
+        List<GameDetails> gameDetails = serviceDetailsGame.listSearch(name, countryCode);
         if(gameDetails == null) ResponseEntity.badRequest().body(new MessageResponse("Request don't finish"));
         return ResponseEntity.ok(gameDetails);
     }

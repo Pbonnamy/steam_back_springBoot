@@ -36,11 +36,11 @@ public class ListController {
 
     }
 
-    @PostMapping("/save/whishlist/{id}")
+    @PostMapping("/save/whishlist/{id}/{countryCode}")
     @PreAuthorize("hasRole('USER')")
-    public WhishList save(@PathVariable int id, HttpServletRequest request) throws IOException {
+    public WhishList save(@PathVariable int id,@PathVariable String countryCode,  HttpServletRequest request) throws IOException {
         String name = decodeName(request.getHeader("Authorization"));
-        return serviceDetailsGame.save(name, id, "whishlist");
+        return serviceDetailsGame.save(name,countryCode,  id, "whishlist");
 
     }
 
@@ -60,11 +60,11 @@ public class ListController {
 
     }
 
-    @PostMapping("/save/like/{id}")
+    @PostMapping("/save/like/{id}/{countryCode}")
     @PreAuthorize("hasRole('USER')")
-    public WhishList saveLike(@PathVariable int id, HttpServletRequest request) throws IOException {
+    public WhishList saveLike(@PathVariable int id, @PathVariable String countryCode,  HttpServletRequest request) throws IOException {
         String name = decodeName(request.getHeader("Authorization"));
-        return serviceDetailsGame.save(name, id, "like");
+        return serviceDetailsGame.save(name,countryCode,  id, "like");
 
     }
 

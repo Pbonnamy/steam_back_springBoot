@@ -1,5 +1,6 @@
 package com.back_end_android.back_end.retrofit;
 
+import com.back_end_android.back_end.models.Language;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import retrofit2.Call;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public class ControllerReviewResponse {
 
-    public List<ReviewResponse.Review> start(int id) throws IOException {
+    public List<ReviewResponse.Review> start(int id, Language language) throws IOException {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -22,7 +23,7 @@ public class ControllerReviewResponse {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         SteamApi reviewApi = retrofit.create(SteamApi.class);
-        Call<ReviewResponse> call = reviewApi.getReviews(id, 1);
+        Call<ReviewResponse> call = reviewApi.getReviews(id, 1, language.getLanguage());
         Response<ReviewResponse> reviewResponseResponse = call.execute();
         if(reviewResponseResponse.isSuccessful()){
             ReviewResponse reviewResponse = reviewResponseResponse.body();

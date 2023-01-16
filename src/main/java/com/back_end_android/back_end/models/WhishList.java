@@ -28,9 +28,22 @@ public class WhishList {
     private String price;
 
     private String type;
-    
 
-    public WhishList( String tenant, String name, int steamID, String editor, List<String> urlImage, String cover, String description, String price, String type) {
+    private String countryCode;
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
+
+    public WhishList(String tenant, String name, int steamID, String editor, List<String> urlImage, String cover, String description, String price, String countryCode, String type) {
         this.tenant = tenant;
         this.name = name;
         this.steamID = steamID;
@@ -39,6 +52,7 @@ public class WhishList {
         this.cover = cover;
         this.description = description;
         this.price = price;
+        this.countryCode = countryCode;
         this.type = type;
     }
 

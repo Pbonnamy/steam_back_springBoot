@@ -1,5 +1,6 @@
 package com.back_end_android.back_end.service;
 
+import com.back_end_android.back_end.models.Language;
 import com.back_end_android.back_end.models.User;
 import com.back_end_android.back_end.models.WhishList;
 import com.back_end_android.back_end.models.responseRetrofit.GameDetails;
@@ -33,11 +34,6 @@ public class ServiceDetailsGame {
     public GameDetails setGame(int id, String country) throws IOException {
         ControllerOther controller = new ControllerOther();
         return controller.start(id, country);
-    }
-
-    public GameDetails setGame(int id) throws IOException {
-        ControllerOther controller = new ControllerOther();
-        return controller.start(id, "fr");
     }
 
     public ReviewEntityReponse setReview(ReviewResponse.Review review) throws IOException {
@@ -87,9 +83,10 @@ public class ServiceDetailsGame {
     }
 
 
-    public List<ReviewEntityReponse> listReviewGame(int id, int start, int finish) throws IOException {
+    public List<ReviewEntityReponse> listReviewGame(String countryCode, int id, int start, int finish) throws IOException {
+        Language language = Language.valueOf(countryCode.toUpperCase());
         ControllerReviewResponse controller = new ControllerReviewResponse();
-        List<ReviewResponse.Review> reviews = controller.start(id);
+        List<ReviewResponse.Review> reviews = controller.start(id, language);
         int max = Math.min(finish, reviews.size());
         List<ReviewEntityReponse> reviewResponseList = new ArrayList<>();
         for (int i=start; i<max; i++){
@@ -101,28 +98,28 @@ public class ServiceDetailsGame {
     }
 
 
-    public List<GameDetails> listSearch(String search) throws IOException {
+    public List<GameDetails> listSearch(String search, String countryCode) throws IOException {
         ControllerSearch controllerSearch = new ControllerSearch();
         SearchRetrofit searchRetrofit = controllerSearch.start(search);
         List<SearchRetrofit.Item> items = searchRetrofit.getItems();
         List<GameDetails> searchItems = new ArrayList<>();
         for (int i=0; i<items.size(); i++){
             int id = items.get(i).getId();
-            searchItems.add(setGame(id));
+            searchItems.add(setGame(id, countryCode));
         }
         return searchItems;
     }
 
 
-    public WhishList save(String name, int steamId, String type) throws IOException {
+    public WhishList save(String name,String countryCode,  int steamId, String type) throws IOException {
         Optional<User> user =  userRepository.findByUsername(name);
-        if(user.isPresent()==false) {
+        if(!user.isPresent()) {
             return null;
         }
         String userId = user.get().getId();
-        GameDetails gameDetails = setGame(steamId);
+        GameDetails gameDetails = setGame(steamId, countryCode);
         WhishList whishList = new WhishList(userId,gameDetails.getName(), gameDetails.getId(),gameDetails.getEditor(),gameDetails.getUrlImage(),
-                gameDetails.getCover(),gameDetails.getDescription(),gameDetails.getPrice(), type);
+                gameDetails.getCover(),gameDetails.getDescription(),gameDetails.getPrice(), countryCode,  type);
         return wishlistRepository.save(whishList);
 
     }
@@ -135,7 +132,7 @@ public class ServiceDetailsGame {
 
     public List<WhishList> listWhishlist(String name, String type){
         Optional<User> user =  userRepository.findByUsername(name);
-        if(user.isPresent()==false) {
+        if(!user.isPresent()) {
             return null;
         }
         String userId = user.get().getId();
