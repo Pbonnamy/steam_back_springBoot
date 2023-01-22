@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"test\",\n    \"email\": \"aristide.ff@gmail.com\",\n    \"roles\": [\n        \"ROLE_USER\"\n    ],\n    \"password\": \"tesjjjt.\"\n    \n}",
+					"raw": "{\n    \"username\": \"test2\",\n    \"email\": \"aristide.ff@gmail.com\",\n    \"roles\": [\n        \"ROLE_USER\"\n    ],\n    \"password\": \"tesjjjt.\"\n    \n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -43,7 +43,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"test\",\n    \"password\":\"Apple\"\n}",
+					"raw": "{\n    \"username\": \"aristide.ff@gmail.com\",\n    \"password\":\"tesjjjt.\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -123,6 +123,16 @@
 		{
 			"name": "details",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhcmlzdGlkZS5mZkBnbWFpbC5jb20iLCJpYXQiOjE2NzQ0MjUwMjYsImV4cCI6MTY3NDUxMTQyNn0.0F1Olvnaq3CTDnc_yzqjaX6VOgW8UmVEyiBmlA8bS32ivgooi-8_BSQO4hiGwMJLbypMtob6M9MXNCDNQvsQ-g",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -156,7 +166,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/steam/search/en/test/",
+					"raw": "http://localhost:8080/api/steam/search/fr/ab",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -166,9 +176,8 @@
 						"api",
 						"steam",
 						"search",
-						"en",
-						"test",
-						""
+						"fr",
+						"ab"
 					]
 				}
 			},
@@ -182,7 +191,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjcyNDQyNTEyLCJleHAiOjE2NzI1Mjg5MTJ9._T0AUUVmbMYanctgPulFyXtcjx_YuO31QiZ2AfNsvQMxXmKZQgncOZMFbwIoXtMTNzX1lsN2Bc9gUotzgFb2iw",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhcmlzdGlkZS5mZkBnbWFpbC5jb20iLCJpYXQiOjE2NzQ0MjUwMjYsImV4cCI6MTY3NDUxMTQyNn0.0F1Olvnaq3CTDnc_yzqjaX6VOgW8UmVEyiBmlA8bS32ivgooi-8_BSQO4hiGwMJLbypMtob6M9MXNCDNQvsQ-g",
 							"type": "string"
 						}
 					]
@@ -212,7 +221,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/steam/reviews/en/271590/0/10",
+					"raw": "http://localhost:8080/api/steam/reviews/en/1938090/0/20",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -223,9 +232,9 @@
 						"steam",
 						"reviews",
 						"en",
-						"271590",
+						"1938090",
 						"0",
-						"10"
+						"20"
 					]
 				}
 			},
@@ -239,7 +248,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjczOTA0MjcxLCJleHAiOjE2NzM5OTA2NzF9.jRe16gYIlGf1Y01X4CJU5ad_AfxyWx37IIsdIZh5_W7hmYoaKbU2kn30q1wz3HoiEg1eYjS5ZmyMva6ZOnRuJA",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhcmlzdGlkZS5mZkBnbWFpbC5jb20iLCJpYXQiOjE2NzQ0MjUwMjYsImV4cCI6MTY3NDUxMTQyNn0.0F1Olvnaq3CTDnc_yzqjaX6VOgW8UmVEyiBmlA8bS32ivgooi-8_BSQO4hiGwMJLbypMtob6M9MXNCDNQvsQ-g",
 							"type": "string"
 						}
 					]
@@ -273,7 +282,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjcyNDQyNTEyLCJleHAiOjE2NzI1Mjg5MTJ9._T0AUUVmbMYanctgPulFyXtcjx_YuO31QiZ2AfNsvQMxXmKZQgncOZMFbwIoXtMTNzX1lsN2Bc9gUotzgFb2iw",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhcmlzdGlkZS5mZkBnbWFpbC5jb20iLCJpYXQiOjE2NzQ0MjUwMjYsImV4cCI6MTY3NDUxMTQyNn0.0F1Olvnaq3CTDnc_yzqjaX6VOgW8UmVEyiBmlA8bS32ivgooi-8_BSQO4hiGwMJLbypMtob6M9MXNCDNQvsQ-g",
 							"type": "string"
 						}
 					]
@@ -281,7 +290,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/list/delete/63b0144ed593fc5fddfbe10c",
+					"raw": "http://localhost:8080/api/list/delete/63c5cbac1ff8d01463a4eb9b",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -291,7 +300,7 @@
 						"api",
 						"list",
 						"delete",
-						"63b0144ed593fc5fddfbe10c"
+						"63c5cbac1ff8d01463a4eb9b"
 					]
 				}
 			},
@@ -305,7 +314,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjcyNDQyNTEyLCJleHAiOjE2NzI1Mjg5MTJ9._T0AUUVmbMYanctgPulFyXtcjx_YuO31QiZ2AfNsvQMxXmKZQgncOZMFbwIoXtMTNzX1lsN2Bc9gUotzgFb2iw",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhcmlzdGlkZS5mZkBnbWFpbC5jb20iLCJpYXQiOjE2NzQ0MjUwMjYsImV4cCI6MTY3NDUxMTQyNn0.0F1Olvnaq3CTDnc_yzqjaX6VOgW8UmVEyiBmlA8bS32ivgooi-8_BSQO4hiGwMJLbypMtob6M9MXNCDNQvsQ-g",
 							"type": "string"
 						}
 					]
@@ -337,7 +346,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjczOTA0MjcxLCJleHAiOjE2NzM5OTA2NzF9.jRe16gYIlGf1Y01X4CJU5ad_AfxyWx37IIsdIZh5_W7hmYoaKbU2kn30q1wz3HoiEg1eYjS5ZmyMva6ZOnRuJA",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhcmlzdGlkZS5mZkBnbWFpbC5jb20iLCJpYXQiOjE2NzQ0MjUwMjYsImV4cCI6MTY3NDUxMTQyNn0.0F1Olvnaq3CTDnc_yzqjaX6VOgW8UmVEyiBmlA8bS32ivgooi-8_BSQO4hiGwMJLbypMtob6M9MXNCDNQvsQ-g",
 							"type": "string"
 						}
 					]
