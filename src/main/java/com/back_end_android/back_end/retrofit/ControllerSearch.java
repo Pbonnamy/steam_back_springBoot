@@ -1,5 +1,6 @@
 package com.back_end_android.back_end.retrofit;
 
+import com.back_end_android.back_end.models.Language;
 import com.back_end_android.back_end.models.Pojo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public class ControllerSearch {
 
-    public SearchRetrofit start(String br) throws IOException {
+    public SearchRetrofit start(String br, String countryCode) throws IOException {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -24,7 +25,8 @@ public class ControllerSearch {
                 .build();
 
         SteamApi steamApi = retrofit.create(SteamApi.class);
-        Call<SearchRetrofit> searchRetrofitCall = steamApi.getSearch(br,"french", "FR");
+        Language language = Language.valueOf(countryCode.toUpperCase());
+        Call<SearchRetrofit> searchRetrofitCall = steamApi.getSearch(br,language.getLanguage(), countryCode);
         Response<SearchRetrofit> searchRetrofitResponse = searchRetrofitCall.execute();
         if (searchRetrofitResponse.isSuccessful()){
             return searchRetrofitResponse.body();

@@ -8,4 +8,6 @@ import java.util.List;
 public interface WishlistRepository extends MongoRepository<WhishList,String> {
 
     List<WhishList> findAllByTenantAndType(String tenant, String type);
+
+    List<WhishList> findByCountryCodeAndSteamIDAndType(String countryCode, int steamID, String type);
 }

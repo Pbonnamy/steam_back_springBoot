@@ -100,7 +100,7 @@ public class ServiceDetailsGame {
 
     public List<GameDetails> listSearch(String search, String countryCode) throws IOException {
         ControllerSearch controllerSearch = new ControllerSearch();
-        SearchRetrofit searchRetrofit = controllerSearch.start(search);
+        SearchRetrofit searchRetrofit = controllerSearch.start(search, countryCode);
         List<SearchRetrofit.Item> items = searchRetrofit.getItems();
         List<GameDetails> searchItems = new ArrayList<>();
         for (int i=0; i<items.size(); i++){

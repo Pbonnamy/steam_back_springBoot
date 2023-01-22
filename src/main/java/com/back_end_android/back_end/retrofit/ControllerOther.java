@@ -2,15 +2,11 @@ package com.back_end_android.back_end.retrofit;
 
 import com.back_end_android.back_end.models.Language;
 import com.back_end_android.back_end.models.responseRetrofit.GameDetails;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import javax.naming.ldap.LdapName;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +42,7 @@ public class ControllerOther {
         gameDetails.setDescription(data.getDetailed_description());
         gameDetails.setEditor(data.getPublishers().get(0));
         String[] cover = data.getHeader().split("\\?t");
-        if (data.getPriceOverview() == null ) {
+        if (data.getPriceOverview() == null) {
             gameDetails.setPrice(language.getPrice());
         } else {
             gameDetails.setPrice(data.getPriceOverview().getFinalFormatted());

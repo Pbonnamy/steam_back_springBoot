@@ -1,7 +1,7 @@
 package com.back_end_android.back_end.models;
 
 public enum Language {
-    FR("french", "O.00€"), EN("english", "$0.00USD");
+    FR("french", "0.00€"), EN("english", "$0.00USD");
 
     private final String language;
 
