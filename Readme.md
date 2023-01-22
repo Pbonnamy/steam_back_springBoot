@@ -13,7 +13,10 @@ Et créer dans cette bdd une collection roles et y mettre
 }
 ````
 C'est le seul role autoriser pour le jwt que nous avons créer
+Attention pour ne pas avoir de timeout a cause de springboot il faut rajouter 
+cela au profile -Dsun.net.client.defaultConnectTimeout=5000 -Dsun.net.client.defaultReadTimeout=5000
 ⚠ les endpoints ne sont plus bon. Regarder l'export postman 
+
 Je compte mettre un swagger quand j'aurais le temps
 
 les endpoints
