@@ -30,8 +30,8 @@ public class ListController {
     @GetMapping("/all/whishlist")
     @PreAuthorize("hasRole('USER')")
     public List<WhishList> list(HttpServletRequest request) {
-        String name = decodeName(request.getHeader("Authorization"));
-        return serviceDetailsGame.listWhishlist(name, "whishlist");
+        String email = decodeEmail(request.getHeader("Authorization"));
+        return serviceDetailsGame.listWhishlist(email, "whishlist");
 
 
     }
@@ -39,8 +39,8 @@ public class ListController {
     @PostMapping("/save/whishlist/{id}/{countryCode}")
     @PreAuthorize("hasRole('USER')")
     public WhishList save(@PathVariable int id,@PathVariable String countryCode,  HttpServletRequest request) throws IOException {
-        String name = decodeName(request.getHeader("Authorization"));
-        return serviceDetailsGame.save(name,countryCode,  id, "whishlist");
+        String email = decodeEmail(request.getHeader("Authorization"));
+        return serviceDetailsGame.save(email,countryCode,  id, "whishlist");
 
     }
 
@@ -54,8 +54,8 @@ public class ListController {
     @GetMapping("/all/likelist")
     @PreAuthorize("hasRole('USER')")
     public List<WhishList> listLike(HttpServletRequest request) {
-        String name = decodeName(request.getHeader("Authorization"));
-        return serviceDetailsGame.listWhishlist(name, "like");
+        String email = decodeEmail(request.getHeader("Authorization"));
+        return serviceDetailsGame.listWhishlist(email, "like");
 
 
     }
@@ -63,13 +63,13 @@ public class ListController {
     @PostMapping("/save/like/{id}/{countryCode}")
     @PreAuthorize("hasRole('USER')")
     public WhishList saveLike(@PathVariable int id, @PathVariable String countryCode,  HttpServletRequest request) throws IOException {
-        String name = decodeName(request.getHeader("Authorization"));
+        String name = decodeEmail(request.getHeader("Authorization"));
         return serviceDetailsGame.save(name,countryCode,  id, "like");
 
     }
 
 
-    private String decodeName(String encodedString) {
+    private String decodeEmail(String encodedString) {
         String[] jwtDetails = encodedString.split(" ");
         return jwtUtils.getUserNameFromJwtToken(jwtDetails[1]);
     }

@@ -1,11 +1,12 @@
 package com.back_end_android.back_end.service;
 
+import com.back_end_android.back_end.models.GameDetailUp;
 import com.back_end_android.back_end.models.Language;
 import com.back_end_android.back_end.models.User;
 import com.back_end_android.back_end.models.WhishList;
 import com.back_end_android.back_end.models.responseRetrofit.GameDetails;
 import com.back_end_android.back_end.models.responseRetrofit.ReviewEntityReponse;
-import com.back_end_android.back_end.models.responseRetrofit.SearchItem;
+import com.back_end_android.back_end.payload.response.MessageResponse;
 import com.back_end_android.back_end.repository.UserRepository;
 import com.back_end_android.back_end.repository.WishlistRepository;
 import com.back_end_android.back_end.retrofit.*;
@@ -13,6 +14,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -24,6 +26,7 @@ import java.util.regex.Pattern;
 
 @Service
 public class ServiceDetailsGame {
+
 
     @Autowired
     UserRepository userRepository;
@@ -56,7 +59,7 @@ public class ServiceDetailsGame {
 
     private String getContent(String id) throws IOException {
         final OkHttpClient client = new OkHttpClient.Builder().build();
-        final String urlToScrape = "https://steamcommunity.com/profiles/"+id;// + id;
+        final String urlToScrape = "https://steamcommunity.com/profiles/" + id;// + id;
         final Request request = new Request.Builder().url(urlToScrape).build();
         final Response response = client.newCall(request).execute();
         return response.body().string();
@@ -71,12 +74,12 @@ public class ServiceDetailsGame {
     }
 
 
-    public List<GameDetails> listRanking(String country, int start,int finish ) throws IOException {
+    public List<GameDetails> listRanking(String country, int start, int finish) throws IOException {
         ControllerTest controllerTest = new ControllerTest();
         int[] ids = controllerTest.start();
         List<GameDetails> gameDetailsList = new ArrayList<>();
         int max = Math.min(finish, ids.length);
-        for (int i= start; i<max; i++){
+        for (int i = start; i < max; i++) {
             gameDetailsList.add(setGame(ids[i], country));
         }
         return gameDetailsList;
@@ -89,7 +92,7 @@ public class ServiceDetailsGame {
         List<ReviewResponse.Review> reviews = controller.start(id, language);
         int max = Math.min(finish, reviews.size());
         List<ReviewEntityReponse> reviewResponseList = new ArrayList<>();
-        for (int i=start; i<max; i++){
+        for (int i = start; i < max; i++) {
             reviewResponseList.add(setReview(reviews.get(i)));
         }
 
@@ -103,7 +106,7 @@ public class ServiceDetailsGame {
         SearchRetrofit searchRetrofit = controllerSearch.start(search, countryCode);
         List<SearchRetrofit.Item> items = searchRetrofit.getItems();
         List<GameDetails> searchItems = new ArrayList<>();
-        for (int i=0; i<items.size(); i++){
+        for (int i = 0; i < items.size(); i++) {
             int id = items.get(i).getId();
             searchItems.add(setGame(id, countryCode));
         }
@@ -111,32 +114,51 @@ public class ServiceDetailsGame {
     }
 
 
-    public WhishList save(String name,String countryCode,  int steamId, String type) throws IOException {
-        Optional<User> user =  userRepository.findByUsername(name);
-        if(!user.isPresent()) {
+    public WhishList save(String email, String countryCode, int steamId, String type) throws IOException {
+        Optional<User> user = userRepository.findByEmail(email);
+        if (!user.isPresent()) {
             return null;
         }
         String userId = user.get().getId();
         GameDetails gameDetails = setGame(steamId, countryCode);
-        WhishList whishList = new WhishList(userId,gameDetails.getName(), gameDetails.getId(),gameDetails.getEditor(),gameDetails.getUrlImage(),
-                gameDetails.getCover(),gameDetails.getDescription(),gameDetails.getPrice(), countryCode,  type);
+        WhishList whishList = new WhishList(userId, gameDetails.getName(), gameDetails.getId(), gameDetails.getEditor(), gameDetails.getUrlImage(),
+                gameDetails.getCover(), gameDetails.getDescription(), gameDetails.getPrice(), countryCode, type);
         return wishlistRepository.save(whishList);
 
     }
 
 
-    public void delete(String id){
+    public void delete(String id) {
         wishlistRepository.deleteById(id);
     }
 
 
-    public List<WhishList> listWhishlist(String name, String type){
-        Optional<User> user =  userRepository.findByUsername(name);
-        if(!user.isPresent()) {
+    public List<WhishList> listWhishlist(String email, String type) {
+        Optional<User> user = userRepository.findByEmail(email);
+        if (!user.isPresent()) {
             return null;
         }
         String userId = user.get().getId();
         return wishlistRepository.findAllByTenantAndType(userId, type);
+    }
+
+
+    public ResponseEntity<?> detailGameController(int id, String country, String email) throws IOException {
+        GameDetails gameDetails = setGame(id, country);
+        Optional<User> user = userRepository.findByEmail(email);
+        if (!user.isPresent()) {
+            return ResponseEntity.badRequest().body(new MessageResponse("User not found"));
+        }
+        User user1 = user.get();
+        if (gameDetails == null) return ResponseEntity.badRequest().body(new MessageResponse("Request don't finish"));
+        List<WhishList> wishlist = wishlistRepository.findByCountryCodeAndSteamIDAndTypeAndTenant(country, id, "whishlist", user1.getId());
+        Boolean isWish;
+        Boolean isLike;
+        isWish = !wishlist.isEmpty();
+        List<WhishList> like = wishlistRepository.findByCountryCodeAndSteamIDAndTypeAndTenant(country, id, "like", user1.getId());
+        isLike = !like.isEmpty();
+        GameDetailUp gameDetailUp = new GameDetailUp(gameDetails, isWish, isLike);
+        return ResponseEntity.ok(gameDetailUp);
     }
 
 }
