@@ -23,10 +23,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -51,6 +48,7 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
+
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Validated @RequestBody LoginRequest loginRequest) {
 
@@ -72,38 +70,77 @@ public class AuthController {
                 roles));
     }
 
-    @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Validated @RequestBody SignupRequest signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+    @PostMapping("/signup/{cc}")
+    public ResponseEntity<?> registerUser(@Validated @RequestBody SignupRequest signUpRequest,@PathVariable("cc") String cc ) {
+        Map<String, List<String>> language = new HashMap<>();
+        List<String> languagesFr = new ArrayList<>();
+        languagesFr.add("Erreur: L'adresse email est déjà utilisée!");
+        languagesFr.add("Erreur: Le nom de l'utilisateur est déjà utilisée!");
+        languagesFr.add("Erreur: Le role n'est pas trouvé!");
+        languagesFr.add("Erreur: Le role n'existe pas!");
+        languagesFr.add("L'utilisateur c'est bien enregistrer !");
+        languagesFr.add("Erreur: Le nom de l'utilisateur est trop grand (Maximum 20) ou trop petit (Minimum 3)!");
+        languagesFr.add("Erreur: Password est trop petit (Minimum 6)!");
+        languagesFr.add("Erreur: Email est trop grand (Maximum 50)!");
+        List<String> languagesEn = new ArrayList<>();
+        languagesEn.add("Error: Email is already in use!");
+        languagesEn.add("Error: Username is already in use!");
+        languagesEn.add("Error: Role is not found.");
+        languagesEn.add("Error: Role is not found.");
+        languagesEn.add("User registered successfully!");
+        languagesEn.add("Error: Username is too long (Maximum 20) or too short (Minimum 3)!");
+        languagesEn.add("Error: Password   too short (Minimum 6)!");
+        languagesEn.add("Error: Email   too long (Maixmum 50)!");
+        language.put("fr", languagesFr);
+        language.put("en", languagesEn);
+        if(signUpRequest.getUsername().length() < 3 || signUpRequest.getUsername().length() >= 20){
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
+                    .body(new MessageResponse(language.get(cc).get(5)));
+        }
+        if(signUpRequest.getPassword().length() <= 6 ){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse(language.get(cc).get(7)));
+        }
+        if(signUpRequest.getEmail().length() > 50){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse(language.get(cc).get(0)));
+        }
+
+        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse(language.get(cc).get(1)));
         }
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Email is already taken!"));
+                    .body(new MessageResponse(language.get(cc).get(0)));
         }
 
-
+        String password = encoder.encode(signUpRequest.getPassword());
         // Create new user's account
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
+                password
+                );
 
         Set<String> strRoles = signUpRequest.getRoles();
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
             Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                    .orElseThrow(() -> new RuntimeException(language.get(cc).get(2)));
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
                     default:
                         Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                                .orElseThrow(() -> new RuntimeException(language.get(cc).get(2)));
                         roles.add(userRole);
                 }
             });
@@ -112,7 +149,7 @@ public class AuthController {
         user.setRoles(roles);
         userRepository.save(user);
 
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        return ResponseEntity.ok(new MessageResponse(language.get(cc).get(4)));
     }
 
     @PostMapping("/lost")

@@ -155,9 +155,11 @@ public class ServiceDetailsGame {
         Boolean isWish;
         Boolean isLike;
         isWish = !wishlist.isEmpty();
+        String idWish = wishlist.isEmpty() ? null: wishlist.get(0).getId().toString();
         List<WhishList> like = wishlistRepository.findByCountryCodeAndSteamIDAndTypeAndTenant(country, id, "like", user1.getId());
         isLike = !like.isEmpty();
-        GameDetailUp gameDetailUp = new GameDetailUp(gameDetails, isWish, isLike);
+        String idLike = like.isEmpty() ? null : like.get(0).getId().toString();
+        GameDetailUp gameDetailUp = new GameDetailUp(gameDetails, isWish, isLike, idLike, idWish);
         return ResponseEntity.ok(gameDetailUp);
     }
 

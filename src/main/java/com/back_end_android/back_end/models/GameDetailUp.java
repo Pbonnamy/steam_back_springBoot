@@ -9,6 +9,11 @@ public class GameDetailUp {
 
     Boolean isWishList;
 
+    String idLike;
+
+    String idWishList;
+
+
     public GameDetails getGameDetails() {
         return gameDetails;
     }
@@ -33,9 +38,19 @@ public class GameDetailUp {
         isWishList = wishList;
     }
 
-    public GameDetailUp(GameDetails gameDetails, Boolean isFavorite, Boolean isWishList) {
+    public String getIdLike() {
+        return idLike;
+    }
+
+    public String getIdWishList() {
+        return idWishList;
+    }
+
+    public GameDetailUp(GameDetails gameDetails, Boolean isFavorite, Boolean isWishList, String idLike, String idWishList) {
         this.gameDetails = gameDetails;
         this.isFavorite = isFavorite;
         this.isWishList = isWishList;
+        this.idLike = idLike;
+        this.idWishList = idWishList;
     }
 }
