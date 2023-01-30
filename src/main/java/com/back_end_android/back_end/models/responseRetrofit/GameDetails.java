@@ -18,12 +18,20 @@ public class GameDetails {
 
     private  int id;
 
+    public int getSteamId() {
+        return steamId;
+    }
+
+    public void setSteamId(int steamId) {
+        this.steamId = steamId;
+    }
 
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
+        this.steamId= id;
         this.id = id;
     }
 
@@ -58,6 +66,7 @@ public class GameDetails {
     public String getName() {
         return name;
     }
+    private int steamId;
 
     public String getEditor() {
         return editor;

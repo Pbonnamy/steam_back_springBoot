@@ -13,6 +13,7 @@ import com.back_end_android.back_end.retrofit.*;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -121,6 +122,10 @@ public class ServiceDetailsGame {
         }
         String userId = user.get().getId();
         GameDetails gameDetails = setGame(steamId, countryCode);
+        WhishList whishList1 =  wishlistRepository.findGame(countryCode, steamId, type, userId);
+        if (whishList1 != null) {
+            return null;
+        }
         WhishList whishList = new WhishList(userId, gameDetails.getName(), gameDetails.getId(), gameDetails.getEditor(), gameDetails.getUrlImage(),
                 gameDetails.getCover(), gameDetails.getDescription(), gameDetails.getPrice(), countryCode, type);
         return wishlistRepository.save(whishList);
@@ -151,15 +156,15 @@ public class ServiceDetailsGame {
         }
         User user1 = user.get();
         if (gameDetails == null) return ResponseEntity.badRequest().body(new MessageResponse("Request don't finish"));
-        List<WhishList> wishlist = wishlistRepository.findByCountryCodeAndSteamIDAndTypeAndTenant(country, id, "whishlist", user1.getId());
+        WhishList wishlist = wishlistRepository.findGame(country, id, "whishlist", user1.getId());
         Boolean isWish;
         Boolean isLike;
-        isWish = !wishlist.isEmpty();
-        String idWish = wishlist.isEmpty() ? null: wishlist.get(0).getId().toString();
-        List<WhishList> like = wishlistRepository.findByCountryCodeAndSteamIDAndTypeAndTenant(country, id, "like", user1.getId());
-        isLike = !like.isEmpty();
-        String idLike = like.isEmpty() ? null : like.get(0).getId().toString();
-        GameDetailUp gameDetailUp = new GameDetailUp(gameDetails, isWish, isLike, idLike, idWish);
+        isWish = wishlist != null;
+        String idWish = wishlist == null? null: wishlist.getId().toString();
+        WhishList like = wishlistRepository.findGame(country, id, "like", user1.getId());
+        isLike = like != null;
+        String idLike = like == null ? null : like.getId().toString();
+        GameDetailUp gameDetailUp = new GameDetailUp(gameDetails,isLike,  isWish , idLike, idWish);
         return ResponseEntity.ok(gameDetailUp);
     }
 

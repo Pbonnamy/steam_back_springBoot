@@ -38,7 +38,7 @@ public class ControllerOther {
 
         SteamApp.Data data = steamApp.getData();
         gameDetails.setName(data.getName());
-        gameDetails.setId(id);
+        gameDetails.setSteamId(id);
         String noImages = data.getDetailed_description().replaceAll("<img[^>]*>", "");
         gameDetails.setDescription(noImages);
         gameDetails.setEditor(data.getPublishers().get(0));
