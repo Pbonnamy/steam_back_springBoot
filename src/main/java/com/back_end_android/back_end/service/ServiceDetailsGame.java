@@ -6,6 +6,7 @@ import com.back_end_android.back_end.models.User;
 import com.back_end_android.back_end.models.WhishList;
 import com.back_end_android.back_end.models.responseRetrofit.GameDetails;
 import com.back_end_android.back_end.models.responseRetrofit.ReviewEntityReponse;
+import com.back_end_android.back_end.payload.response.GameDetailUser;
 import com.back_end_android.back_end.payload.response.MessageResponse;
 import com.back_end_android.back_end.repository.UserRepository;
 import com.back_end_android.back_end.repository.WishlistRepository;
@@ -148,24 +149,25 @@ public class ServiceDetailsGame {
     }
 
 
-    public ResponseEntity<?> detailGameController(int id, String country, String email) throws IOException {
+    public ResponseEntity<?> detailGameController(int id, String country) throws IOException {
         GameDetails gameDetails = setGame(id, country);
+        GameDetailUp gameDetailUp = new GameDetailUp(gameDetails);
+        return ResponseEntity.ok(gameDetailUp);
+    }
+
+    public ResponseEntity<?> detailGameControllerUser(String country,String email,  int steamId) throws IOException {
         Optional<User> user = userRepository.findByEmail(email);
         if (!user.isPresent()) {
-            return ResponseEntity.badRequest().body(new MessageResponse("User not found"));
+            return ResponseEntity.badRequest().body("User not found");
         }
-        User user1 = user.get();
-        if (gameDetails == null) return ResponseEntity.badRequest().body(new MessageResponse("Request don't finish"));
-        WhishList wishlist = wishlistRepository.findGame(country, id, "whishlist", user1.getId());
-        Boolean isWish;
-        Boolean isLike;
-        isWish = wishlist != null;
-        String idWish = wishlist == null? null: wishlist.getId().toString();
-        WhishList like = wishlistRepository.findGame(country, id, "like", user1.getId());
-        isLike = like != null;
-        String idLike = like == null ? null : like.getId().toString();
-        GameDetailUp gameDetailUp = new GameDetailUp(gameDetails,isLike,  isWish , idLike, idWish);
-        return ResponseEntity.ok(gameDetailUp);
+        WhishList whishList =  wishlistRepository.findGame(country, steamId, "Wishlist", email);
+        WhishList like =  wishlistRepository.findGame(country, steamId, "like", email);
+        Boolean isLike = like != null;
+        Boolean isWishlist = whishList != null;
+        String idLike = like != null ? like.getId() : null;
+        String idWishlist = whishList != null ? whishList.getId() : null;
+        GameDetailUser gameDetails = new GameDetailUser(isWishlist, isLike, idLike, idWishlist);
+        return ResponseEntity.ok(gameDetails);
     }
 
 }

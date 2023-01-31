@@ -48,11 +48,16 @@ public class SteamController {
     }
 
     @GetMapping("/details/{id}/{country}")
-    @PreAuthorize("hasRole('USER')")
     @Cacheable("most2")
     public ResponseEntity<?> detailGame(@PathVariable int id, @PathVariable String country, HttpServletRequest request) throws IOException {
+        return serviceDetailsGame.detailGameController(id, country);
+    }
+
+    @GetMapping("/details/user/game/{steamId}/{country}")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<?> detailGameUser( @PathVariable String country, @PathVariable int steamId,  HttpServletRequest request) throws IOException {
         String email = decodeEmail(request.getHeader("Authorization"));
-        return serviceDetailsGame.detailGameController(id, country, email);
+        return serviceDetailsGame.detailGameControllerUser( country,  email, steamId);
     }
 
 

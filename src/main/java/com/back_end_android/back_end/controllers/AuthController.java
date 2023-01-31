@@ -71,7 +71,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup/{cc}")
-    public ResponseEntity<?> registerUser(@Validated @RequestBody SignupRequest signUpRequest,@PathVariable("cc") String cc ) {
+    public ResponseEntity<?> registerUser( @Validated @RequestBody SignupRequest signUpRequest,@PathVariable("cc") String cc ) {
         Map<String, List<String>> language = new HashMap<>();
         List<String> languagesFr = new ArrayList<>();
         languagesFr.add("Erreur: L'adresse email est déjà utilisée!");
