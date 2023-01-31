@@ -29,7 +29,7 @@ public class ListController {
     ServiceDetailsGame serviceDetailsGame;
 
 
-    @GetMapping("/all/whishlist")
+    @GetMapping("/all/wishlist")
     @PreAuthorize("hasRole('USER')")
     public List<WhishList> list(HttpServletRequest request) {
         String email = decodeEmail(request.getHeader("Authorization"));
@@ -38,7 +38,7 @@ public class ListController {
 
     }
 
-    @PostMapping("/save/whishlist/{id}/{countryCode}")
+    @PostMapping("/save/wishlist/{id}/{countryCode}")
     @PreAuthorize("hasRole('USER')")
     public WhishList save(@PathVariable int id,@PathVariable String countryCode,  HttpServletRequest request) throws IOException {
         String email = decodeEmail(request.getHeader("Authorization"));
