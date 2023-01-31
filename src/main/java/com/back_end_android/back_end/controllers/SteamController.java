@@ -53,11 +53,11 @@ public class SteamController {
         return serviceDetailsGame.detailGameController(id, country);
     }
 
-    @GetMapping("/details/user/game/{steamId}/{country}")
+    @GetMapping("/details/user/game/{steamId}")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<?> detailGameUser( @PathVariable String country, @PathVariable int steamId,  HttpServletRequest request) throws IOException {
+    public ResponseEntity<?> detailGameUser( @PathVariable int steamId,  HttpServletRequest request) throws IOException {
         String email = decodeEmail(request.getHeader("Authorization"));
-        return serviceDetailsGame.detailGameControllerUser( country,  email, steamId);
+        return serviceDetailsGame.detailGameControllerUser(   email, steamId);
     }
 
 

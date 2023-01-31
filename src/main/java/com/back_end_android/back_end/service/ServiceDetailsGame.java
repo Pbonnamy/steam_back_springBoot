@@ -123,7 +123,7 @@ public class ServiceDetailsGame {
         }
         String userId = user.get().getId();
         GameDetails gameDetails = setGame(steamId, countryCode);
-        WhishList whishList1 =  wishlistRepository.findGame(countryCode, steamId, type, userId);
+        WhishList whishList1 =  wishlistRepository.findGame( steamId, type, userId);
         if (whishList1 != null) {
             return null;
         }
@@ -154,13 +154,13 @@ public class ServiceDetailsGame {
         return ResponseEntity.ok(gameDetails);
     }
 
-    public ResponseEntity<?> detailGameControllerUser(String country,String email,  int steamId) throws IOException {
+    public ResponseEntity<?> detailGameControllerUser(String email,  int steamId) throws IOException {
         Optional<User> user = userRepository.findByEmail(email);
         if (!user.isPresent()) {
             return ResponseEntity.badRequest().body("User not found");
         }
-        WhishList whishList =  wishlistRepository.findGame(country, steamId, "whishlist", user.get().getId());
-        WhishList like =  wishlistRepository.findGame(country, steamId, "like", user.get().getId());
+        WhishList whishList =  wishlistRepository.findGame( steamId, "whishlist", user.get().getId());
+        WhishList like =  wishlistRepository.findGame( steamId, "like", user.get().getId());
         Boolean isLike = like != null;
         Boolean isWishlist = whishList != null;
         String idLike = like != null ? like.getId() : null;
