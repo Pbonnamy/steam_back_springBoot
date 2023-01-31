@@ -159,8 +159,8 @@ public class ServiceDetailsGame {
         if (!user.isPresent()) {
             return ResponseEntity.badRequest().body("User not found");
         }
-        WhishList whishList =  wishlistRepository.findGame(country, steamId, "Wishlist", email);
-        WhishList like =  wishlistRepository.findGame(country, steamId, "like", email);
+        WhishList whishList =  wishlistRepository.findGame(country, steamId, "whishlist", user.get().getId());
+        WhishList like =  wishlistRepository.findGame(country, steamId, "like", user.get().getId());
         Boolean isLike = like != null;
         Boolean isWishlist = whishList != null;
         String idLike = like != null ? like.getId() : null;

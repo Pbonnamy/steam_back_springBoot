@@ -15,7 +15,7 @@ public class WhishList {
 
     private String name;
 
-    private int steamID;
+    private int steamId;
 
     private String editor;
 
@@ -43,10 +43,10 @@ public class WhishList {
         this.countryCode = countryCode;
     }
 
-    public WhishList(String tenant, String name, int steamID, String editor, List<String> urlImage, String cover, String description, String price, String countryCode, String type) {
+    public WhishList(String tenant, String name, int steamId, String editor, List<String> urlImage, String cover, String description, String price, String countryCode, String type) {
         this.tenant = tenant;
         this.name = name;
-        this.steamID = steamID;
+        this.steamId = steamId;
         this.editor = editor;
         this.urlImage = urlImage;
         this.cover = cover;
@@ -84,12 +84,12 @@ public class WhishList {
         this.name = name;
     }
 
-    public int getSteamID() {
-        return steamID;
+    public int getSteamId() {
+        return steamId;
     }
 
-    public void setSteamID(int steamID) {
-        this.steamID = steamID;
+    public void setSteamId(int steamId) {
+        this.steamId = steamId;
     }
 
     public String getEditor() {

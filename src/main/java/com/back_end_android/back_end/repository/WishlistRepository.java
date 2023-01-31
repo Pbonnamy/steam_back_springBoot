@@ -10,7 +10,7 @@ public interface WishlistRepository extends MongoRepository<WhishList,String> {
 
     List<WhishList> findAllByTenantAndType(String tenant, String type);
 
-    @Query("{'$and': [{'type': ?2},{'tenant': ?3},{'countryCode': ?0},{'steamID': ?1 }]}")
+    @Query("{'$and': [{'type': ?2},{'tenant': ?3},{'countryCode': ?0},{'steamId': ?1 }]}")
     WhishList findGame(String countryCode, int steamID, String type, String tenant);
 
 }
