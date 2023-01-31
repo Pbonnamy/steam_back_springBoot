@@ -151,8 +151,7 @@ public class ServiceDetailsGame {
 
     public ResponseEntity<?> detailGameController(int id, String country) throws IOException {
         GameDetails gameDetails = setGame(id, country);
-        GameDetailUp gameDetailUp = new GameDetailUp(gameDetails);
-        return ResponseEntity.ok(gameDetailUp);
+        return ResponseEntity.ok(gameDetails);
     }
 
     public ResponseEntity<?> detailGameControllerUser(String country,String email,  int steamId) throws IOException {
