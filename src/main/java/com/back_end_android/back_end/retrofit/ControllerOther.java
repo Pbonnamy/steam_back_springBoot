@@ -50,8 +50,17 @@ public class ControllerOther {
             gameDetails.setPrice(data.getPriceOverview().getFinalFormatted());
         }
         List<String> images = new ArrayList<>();
-        images.add(data.getScreenshots().get(0).getPath_full().split("\\?t")[0]);
-        images.add(data.getScreenshots().get(1).getPath_full().split("\\?t")[0]);
+
+        if (data.getScreenshots() == null) {
+            images.add(cover[0]);
+            images.add(cover[0]);
+        } else if (data.getScreenshots().size() == 1) {
+            images.add(data.getScreenshots().get(0).getPath_full().split("\\?t")[0]);
+            images.add(data.getScreenshots().get(0).getPath_full().split("\\?t")[0]);
+        } else {
+            images.add(data.getScreenshots().get(0).getPath_full().split("\\?t")[0]);
+            images.add(data.getScreenshots().get(1).getPath_full().split("\\?t")[0]);
+        }
         gameDetails.setUrlImage(images);
         gameDetails.setCover(cover[0]);
         return gameDetails;
