@@ -41,7 +41,7 @@ public class Game{
         private int steamAppId;
 
         @SerializedName("required_age")
-        private int requiredAge;
+        private String requiredAge;
 
         @SerializedName("is_free")
         private boolean isFree;
@@ -76,11 +76,11 @@ public class Game{
             this.steamAppId = steamAppId;
         }
 
-        public int getRequiredAge() {
+        public String getRequiredAge() {
             return requiredAge;
         }
 
-        public void setRequiredAge(int requiredAge) {
+        public void setRequiredAge(String requiredAge) {
             this.requiredAge = requiredAge;
         }
 

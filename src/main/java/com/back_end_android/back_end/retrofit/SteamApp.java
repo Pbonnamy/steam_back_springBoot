@@ -173,7 +173,7 @@ public class SteamApp {
         private String type;
         private String name;
         private int steam_appid;
-        private int required_age;
+        private String required_age;
         private boolean is_free;
         private String controller_support;
 
@@ -210,7 +210,7 @@ public class SteamApp {
             return steam_appid;
         }
 
-        public int getRequiredAge() {
+        public String getRequiredAge() {
             return required_age;
         }
 
