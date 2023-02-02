@@ -24,6 +24,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -74,39 +76,41 @@ public class AuthController {
     public ResponseEntity<?> registerUser( @Validated @RequestBody SignupRequest signUpRequest,@PathVariable("cc") String cc ) {
         Map<String, List<String>> language = new HashMap<>();
         List<String> languagesFr = new ArrayList<>();
-        languagesFr.add("Erreur: L'adresse email est déjà utilisée!");
-        languagesFr.add("Erreur: Le nom de l'utilisateur est déjà utilisée!");
-        languagesFr.add("Erreur: Le role n'est pas trouvé!");
-        languagesFr.add("Erreur: Le role n'existe pas!");
-        languagesFr.add("L'utilisateur c'est bien enregistrer !");
-        languagesFr.add("Erreur: Le nom de l'utilisateur est trop grand (Maximum 20) ou trop petit (Minimum 3)!");
-        languagesFr.add("Erreur: Password est trop petit (Minimum 6)!");
-        languagesFr.add("Erreur: Email est trop grand (Maximum 50)!");
+        languagesFr.add("L'adresse email est déjà utilisée!");
+        languagesFr.add("Le nom de l'utilisateur est déjà utilisée!");
+        languagesFr.add("Le role n'existe pas!");
+        languagesFr.add("L'utilisateur s'est bien enregistrer !");
+        languagesFr.add("Le nom de l'utilisateur est trop grand (Maximum 20) ou trop petit (Minimum 3)!");
+        languagesFr.add("Le mot de passe est trop petit (Minimum 6)!");
+        languagesFr.add("Format d'email invalide!");
         List<String> languagesEn = new ArrayList<>();
-        languagesEn.add("Error: Email is already in use!");
-        languagesEn.add("Error: Username is already in use!");
-        languagesEn.add("Error: Role is not found.");
-        languagesEn.add("Error: Role is not found.");
+        languagesEn.add("Email is already in use!");
+        languagesEn.add("Username is already in use!");
+        languagesEn.add("Role is not found.");
         languagesEn.add("User registered successfully!");
-        languagesEn.add("Error: Username is too long (Maximum 20) or too short (Minimum 3)!");
-        languagesEn.add("Error: Password   too short (Minimum 6)!");
-        languagesEn.add("Error: Email   too long (Maixmum 50)!");
+        languagesEn.add("Username is too long (Maximum 20) or too short (Minimum 3)!");
+        languagesEn.add("Password too short (Minimum 6)!");
+        languagesEn.add("Invalid email format!");
         language.put("fr", languagesFr);
         language.put("en", languagesEn);
-        if(signUpRequest.getUsername().length() < 3 || signUpRequest.getUsername().length() >= 20){
+        if(signUpRequest.getUsername().length() < 3 || signUpRequest.getUsername().length() > 20){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse(language.get(cc).get(4)));
+        }
+        if(signUpRequest.getPassword().length() < 6 ){
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse(language.get(cc).get(5)));
         }
-        if(signUpRequest.getPassword().length() <= 6 ){
+
+        Pattern pattern = Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+        Matcher matcher = pattern.matcher(signUpRequest.getEmail());
+
+        if(!matcher.matches()) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse(language.get(cc).get(7)));
-        }
-        if(signUpRequest.getEmail().length() > 50){
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse(language.get(cc).get(0)));
+                    .body(new MessageResponse(language.get(cc).get(6)));
         }
 
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
@@ -149,7 +153,7 @@ public class AuthController {
         user.setRoles(roles);
         userRepository.save(user);
 
-        return ResponseEntity.ok(new MessageResponse(language.get(cc).get(4)));
+        return ResponseEntity.ok(new MessageResponse(language.get(cc).get(3)));
     }
 
     @PostMapping("/lost")

@@ -10,7 +10,6 @@ public class SignupRequest {
     private String username;
 
 
-    @Email
     private String email;
 
     private Set<String> roles;
